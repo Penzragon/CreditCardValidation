@@ -46,35 +46,40 @@ const stringToArray = (string) => {
   }
   return arr;
 };
+const sumAdd = (arr, i) => {
+  let sum = 0;
+  if (arr.length % 2 === 0) {
+    if (i % 2 === 0) {
+      let num = arr[i] * 2;
+      if (num > 9) {
+        num -= 9;
+        sum += num;
+      } else {
+        sum += num;
+      }
+    } else {
+      sum += arr[i];
+    }
+  } else {
+    if (i % 2 === 1) {
+      let num = arr[i] * 2;
+      if (num > 9) {
+        num -= 9;
+        sum += num;
+      } else {
+        sum += num;
+      }
+    } else {
+      sum += arr[i];
+    }
+  }
+  return sum;
+};
 // Luhn Algorithm
 const validateCred = (arr) => {
   let sum = 0;
   for (let i = arr.length - 1; i >= 0; i--) {
-    if (arr.length % 2 === 0) {
-      if (i % 2 === 0) {
-        let num = arr[i] * 2;
-        if (num > 9) {
-          num -= 9;
-          sum += num;
-        } else {
-          sum += num;
-        }
-      } else {
-        sum += arr[i];
-      }
-    } else {
-      if (i % 2 === 1) {
-        let num = arr[i] * 2;
-        if (num > 9) {
-          num -= 9;
-          sum += num;
-        } else {
-          sum += num;
-        }
-      } else {
-        sum += arr[i];
-      }
-    }
+    sum += sumAdd(arr, i);
   }
   return sum % 10 === 0 ? "Valid" : "Invalid";
 };
@@ -119,5 +124,4 @@ const idInvalidCardCompanies = (arr) => {
   return invalidCompName;
 };
 
-console.log(idInvalidCardCompanies(batch));
-console.log(validateCred(stringToArray("4556081059775643")));
+console.log(validateCred(stringToArray("4916828943919158")));
